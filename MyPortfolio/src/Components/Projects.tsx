@@ -7,15 +7,14 @@ interface Repo {
     language: string | null;
     html_url: string;
 }
+
 const Projects = () => {
     const [repos, setRepos] = useState<Repo[]>([]);
 
-    // Reemplaza 'tu-usuario' por tu nombre de usuario de GitHub
-    const githubUsername = "ferjbadev"; // <- Reemplaza con tu usuario de GitHub
+    const githubUsername = "ferjbadev"; // Reemplaza con tu usuario de GitHub
 
     useEffect(() => {
-        // Hacer la solicitud a la API de GitHub
-        fetch(`https://api.github.com/users/ferjbadev/repos`)
+        fetch(`https://api.github.com/users/${githubUsername}/repos`)
             .then((response) => response.json())
             .then((data) => {
                 setRepos(data); // Almacenar los repositorios en el estado
@@ -39,12 +38,12 @@ const Projects = () => {
                         <a
                             href={repo.html_url}
                             key={repo.id}
-                            className="sm:w-1/2 w-100 p-4"
+                            className="sm:w-1/2 w-full p-4"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             <div className="flex relative">
-                                <div className="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 hover:bg-gray-800">
+                                <div className="p-6 relative z-10 w-full border border-gray-800 bg-gray-900 rounded-lg shadow-lg hover:bg-gray-800 transition duration-300 ease-in-out">
                                     <h2 className="tracking-widest text-sm title-font font-medium text-green-400 mb-1">
                                         {repo.language ? repo.language : "Unspecified"}
                                     </h2>
@@ -65,6 +64,3 @@ const Projects = () => {
 };
 
 export default Projects;
-
-
-
