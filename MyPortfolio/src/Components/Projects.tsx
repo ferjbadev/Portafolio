@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+
 interface Repo {
+    // Definición de la interfaz Repo para tipar los datos de los repositorios.
     id: number;
     name: string;
     description: string | null;
@@ -9,22 +11,27 @@ interface Repo {
 }
 
 const Projects = () => {
+    // Estado para almacenar los repositorios
     const [repos, setRepos] = useState<Repo[]>([]);
 
+    // Mi usuario de Github
     const githubUsername = "ferjbadev"; // Reemplaza con tu usuario de GitHub
 
+    // Función para obtener los repositorios del GitHub cuando se monta el componente
     useEffect(() => {
-        fetch(`https://api.github.com/users/${githubUsername}/repos`)
+        fetch(`https://api.github.com/users/${githubUsername}/repos`) // URL de la API de GitHub
             .then((response) => response.json())
             .then((data) => {
-                setRepos(data); // Almacenar los repositorios en el estado
+                setRepos(data); // Almacena los repositorios en el estado
             })
-            .catch((error) => console.error("Error fetching repos:", error));
+            .catch((error) => console.error("Error fetching repos:", error)); // Catch para atrapar errores
     }, []);
 
     return (
+        // Sección principal que contiene el título y la lista de repositorios
         <section id="projects" className="text-gray-400 bg-gray-900 body-font">
             <div className="container px-5 py-10 mx-auto text-center lg:px-40">
+                {/* Contenedor principal */}
                 <div className="flex flex-col w-full mb-20">
                     <h1 className="sm:text-4xl text-3xl font-medium title-font mb-4 text-white">
                         My Projects on GitHub
@@ -34,6 +41,7 @@ const Projects = () => {
                     </p>
                 </div>
                 <div className="flex flex-wrap -m-4">
+                    {/* Itera sobre los repositorios obtenidos de la API */}
                     {repos.map((repo) => (
                         <a
                             href={repo.html_url}
